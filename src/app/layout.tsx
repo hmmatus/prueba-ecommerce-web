@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Lato } from "next/font/google";
 import "./globals.css";
 import AppWrapper from "@/components/wrappers/appWrapper/AppWrapper";
 
-const inter = Inter({ subsets: ["latin"] });
+const lato = Lato({subsets: ["latin"], weight: "900"});
 
 export const metadata: Metadata = {
   title: "E-Commerce App",
@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={lato.className}>
         <AppWrapper>{children}</AppWrapper>
       </body>
     </html>

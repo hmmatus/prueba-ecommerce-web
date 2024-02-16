@@ -6,7 +6,10 @@ module.exports = {
       primary: Colors.primary,
       white: Colors.white,
       black: Colors.black,
-      "text-primary": Colors["text-primary"]
+      "text-primary": Colors["text-primary"],
+      "table-background-primary": Colors["table-background-primary"],
+      error: Colors.error,
+      focus: Colors.focus
     },
     extend: {
 

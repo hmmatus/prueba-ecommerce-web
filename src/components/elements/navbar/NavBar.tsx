@@ -54,7 +54,11 @@ const LaptopMenu = ({ amount, onClick }: CartButtonT) => {
   return (
     <div>
       {menuOptions.map((elto) => (
-        <Link className="mx-2 hover:text-white" key={elto.key} href={elto.route}>
+        <Link
+          className="mx-2 hover:text-white"
+          key={elto.key}
+          href={elto.route}
+        >
           {elto.key.toUpperCase()}
         </Link>
       ))}
@@ -71,13 +75,12 @@ const NavBar = () => {
   const router = useRouter();
 
   const onClickCart = () => {
-    // *For later router.push("cart");
-    console.log("Pressed Cart");
+    router.push("cart");
   };
   return (
     <nav className="bg-primary min-h-20 px-4 flex justify-between items-center ">
       <label>Your Logo</label>
-      {screenSize.width > 1240 ? (
+      {screenSize.width >= 1024 ? (
         <LaptopMenu amount={totalAmount} onClick={onClickCart} />
       ) : (
         <MobileMenu />

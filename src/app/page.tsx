@@ -1,5 +1,4 @@
 import HomeLayout from "@/components/layouts/home/HomeLayout";
-import { ProductI } from "@/models/product";
 import axios from "axios";
 async function getData() {
   try {

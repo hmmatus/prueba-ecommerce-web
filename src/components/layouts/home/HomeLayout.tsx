@@ -15,10 +15,10 @@ const HomeLayout = ({ products }: HomeLayoutP) => {
   const dispatch = useAppDispatch();
 
   const moveToProducts = () => {
-    router.push("products");
+    router.push("/products");
   };
   const moveToCart = () => {
-    router.push("cart");
+    router.push("/cart");
   };
 
   const onAddToCart = (product: ProductI) => {
@@ -29,7 +29,7 @@ const HomeLayout = ({ products }: HomeLayoutP) => {
     if (type === "cart") {
       onAddToCart(product);
     } else if (type === "details") {
-      router.push("details");
+      router.push("/details");
     }
   };
   return (

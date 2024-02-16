@@ -1,0 +1,16 @@
+.tag {
+  min-height: 30px;
+  border-radius: 50px;
+  padding: 8px;
+}
+
+.normal {
+  background-color: theme("colors.white");
+  color: theme("colors.primary");
+  border: 1px solid theme("colors.primary");
+}
+
+.selected {
+  background-color: theme("colors.primary");
+  color: theme("colors.white");
+}

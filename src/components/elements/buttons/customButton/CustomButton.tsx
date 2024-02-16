@@ -6,7 +6,7 @@ type CustomButtonT = {
 };
 const CustomButton = ({ type = "default", onClick, label }: CustomButtonT) => {
   return (
-    <button className={`${styles.button} ${styles[type]}`} onClick={onclick}>
+    <button className={`${styles.button} ${styles[type]}`} onClick={onClick}>
       {label}
     </button>
   );

@@ -3,7 +3,7 @@ import { Lato } from "next/font/google";
 import "./globals.css";
 import AppWrapper from "@/components/wrappers/appWrapper/AppWrapper";
 
-const lato = Lato({subsets: ["latin"], weight: "900"});
+const lato = Lato({subsets: ["latin"], weight: "400"});
 
 export const metadata: Metadata = {
   title: "E-Commerce App",

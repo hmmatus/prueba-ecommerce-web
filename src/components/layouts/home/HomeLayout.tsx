@@ -2,6 +2,8 @@
 import CustomButton from "@/components/elements/buttons/customButton/CustomButton";
 import ProductCard from "@/components/elements/cards/productCard/ProductCard";
 import { ProductI } from "@/models/product";
+import { useAppDispatch } from "@/redux/hooks";
+import { addToCart } from "@/redux/slices/cart";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -10,6 +12,7 @@ type HomeLayoutP = {
 };
 const HomeLayout = ({ products }: HomeLayoutP) => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const moveToProducts = () => {
     router.push("products");
@@ -18,9 +21,15 @@ const HomeLayout = ({ products }: HomeLayoutP) => {
     router.push("cart");
   };
 
+  const onAddToCart = (product: ProductI) => {
+    dispatch(addToCart(product));
+  }
+
   const onClickItem = (product: ProductI, type: string) => {
     if (type === "cart") {
-    } else {
+      onAddToCart(product);
+    } else if (type === "details") {
+      router.push("details");
     }
   };
   return (
@@ -63,7 +72,7 @@ const HomeLayout = ({ products }: HomeLayoutP) => {
           </div>
         </div>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 mt-4 gap-2">
-          {products.slice(0, 3).map((elto, index) => (
+          {products.slice(0, 6).map((elto, index) => (
             <ProductCard
               key={index}
               item={elto}

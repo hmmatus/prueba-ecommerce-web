@@ -11,7 +11,7 @@ type ProductCardT = {
 const ProductCard = ({item, onClickCart, onClickDetails}: ProductCardT) => {
 
   return (
-    <div className="flex flex-col items-center justify-between rounded-lg">
+    <div className="flex flex-col items-center justify-between rounded-lg hover:border-2 shadow-md p-2">
       <Image width={100} height={100} alt="Product image" src={item.image}/>
       <h1>{item.title}</h1>
       <p className="text-text-primary font-normal my-2">{truncateText(item.description, 30)}</p>

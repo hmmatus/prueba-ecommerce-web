@@ -7,6 +7,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { addToCart } from "@/redux/slices/cart";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 type ProductsLayoutP = {
   products: ProductI[];
@@ -45,6 +46,7 @@ const ProductsLayout = ({ products, categories }: ProductsLayoutP) => {
 
   const onAddToCart = (product: ProductI) => {
     dispatch(addToCart(product));
+    toast("Product added to Cart");
   };
 
   const onClickItem = (product: ProductI, type: string) => {

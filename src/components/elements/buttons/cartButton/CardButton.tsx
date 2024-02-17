@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import styles from "./style.module.css";
 import { FaShoppingCart } from "react-icons/fa";
 import { Colors } from "@/styles/colors";
 export type CartButtonT = {
@@ -20,14 +19,22 @@ const CartButton = ({ onClick, amount = 0 }: CartButtonT) => {
   };
   return (
     <button
-      className={`${styles["cart-container"]}`}
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="flex items-center gap-2">
-        <FaShoppingCart width={100} height={100} color={isHovered ? Colors.white : Colors["text-primary"]} />
-        <h1 style={{color: isHovered ? Colors.white : Colors.black}}>{`$${amount}`}</h1>
+      <div
+        className="flex items-center border p-2 rounded-xl"
+        style={{ backgroundColor: isHovered ? Colors.white : Colors.primary }}
+      >
+        <FaShoppingCart
+          size={30}
+          color={isHovered ? Colors.primary : Colors.white}
+        />
+        <h1
+          className="font-bold ml-2"
+          style={{ color: isHovered ? Colors.primary : Colors.white }}
+        >{`$${amount}`}</h1>
       </div>
     </button>
   );

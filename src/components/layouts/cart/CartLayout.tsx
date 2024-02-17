@@ -18,7 +18,7 @@ const CartLayout = () => {
     dispatch(removeFromCart(item));
   };
   const moveToCheckout = () => {
-    // router.push()
+    router.push("/checkout");
   };
   return (
     <main>

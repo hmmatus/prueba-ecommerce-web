@@ -4,6 +4,7 @@ import { ProductI } from "@/models/product";
 import { useAppDispatch } from "@/redux/hooks";
 import { addToCart } from "@/redux/slices/cart";
 import Image from "next/image";
+import { toast } from "react-toastify";
 
 type Props = {
   product: ProductI;
@@ -13,6 +14,7 @@ const DetailLayout = ({ product }: Props) => {
 
   const onAddToCart = () => {
     dispatch(addToCart(product));
+    toast("Product added to Cart");
   }
   return (
     <main>

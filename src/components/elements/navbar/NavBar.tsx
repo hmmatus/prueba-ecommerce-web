@@ -8,12 +8,21 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { MdOutlineMenu, MdMenuOpen } from "react-icons/md";
 import styles from "./style.module.css";
+import Image from "next/image";
 
 const MobileMenu = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  const mobileMenu = [
+    ...menuOptions,
+    {
+      key: "my cart",
+      route: "/cart"
+    }
+  ]
 
   return (
     <>
@@ -33,9 +42,9 @@ const MobileMenu = () => {
         <div
           className={`flex flex-col absolute right-0 top-8 ${styles["mobile-div"]}`}
         >
-          {menuOptions.map((elto) => (
+          {mobileMenu.map((elto) => (
             <Link
-              className="text-black hover:text-white text-xl block m-4"
+              className="text-white hover:text-black text-xl block m-4"
               onClick={() => {
                 setMobileMenuOpen(false);
               }}
@@ -52,10 +61,10 @@ const MobileMenu = () => {
 };
 const LaptopMenu = ({ amount, onClick }: CartButtonT) => {
   return (
-    <div>
+    <div className="flex items-center">
       {menuOptions.map((elto) => (
         <Link
-          className="mx-2 hover:text-white"
+          className="mx-2 font-bold text-white hover:text-black"
           key={elto.key}
           href={elto.route}
         >
@@ -79,7 +88,9 @@ const NavBar = () => {
   };
   return (
     <nav className="bg-primary min-h-20 px-4 flex justify-between items-center ">
-      <label>Your Logo</label>
+      <button onClick={() => router.replace("/")}>
+        <Image loading="lazy" alt="logo" width={80} height={80} src={"/images/logo.png"} />
+      </button>
       {screenSize.width >= 1024 ? (
         <LaptopMenu amount={totalAmount} onClick={onClickCart} />
       ) : (

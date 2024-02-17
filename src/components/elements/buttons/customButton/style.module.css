@@ -1,0 +1,16 @@
+.button {
+  min-width: 60px;
+  min-height: 20px;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.default {
+  background-color: theme("colors.primary");
+  color: theme("colors.white");
+}
+
+.outlined {
+  background-color: transparent;
+  color: theme("colors.primary");
+}

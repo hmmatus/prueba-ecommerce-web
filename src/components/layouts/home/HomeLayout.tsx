@@ -29,7 +29,7 @@ const HomeLayout = ({ products }: HomeLayoutP) => {
     if (type === "cart") {
       onAddToCart(product);
     } else if (type === "details") {
-      router.push("/details");
+      router.push(`/products/${product.id}`);
     }
   };
   return (
@@ -77,7 +77,7 @@ const HomeLayout = ({ products }: HomeLayoutP) => {
               key={index}
               item={elto}
               onClickCart={() => onClickItem(elto, "cart")}
-              onClickDetails={() => onClickItem(elto, "detail")}
+              onClickDetails={() => onClickItem(elto, "details")}
             />
           ))}
         </div>

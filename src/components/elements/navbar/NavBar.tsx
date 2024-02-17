@@ -75,7 +75,7 @@ const NavBar = () => {
   const router = useRouter();
 
   const onClickCart = () => {
-    router.push("cart");
+    router.push("/cart");
   };
   return (
     <nav className="bg-primary min-h-20 px-4 flex justify-between items-center ">

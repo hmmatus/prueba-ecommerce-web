@@ -1,12 +1,11 @@
-"use client";
-import CustomButton from "@/components/elements/buttons/customButton/CustomButton";
+import CustomButton from "@/components/elements/buttons/customButton/CustomButton"
 import { ProductI } from "@/models/product";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { removeFromCart } from "@/redux/slices/cart";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 
-const CartLayout = () => {
+const CheckoutLayout = () => {
   const { cart } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -18,12 +17,11 @@ const CartLayout = () => {
   };
   const moveToCheckout = () => {
     // router.push()
-  }
+  };
   return (
     <main>
       <div className="md:shadow-lg md:rounded-lg md:mx-4 mt-2 p-4">
-        <h1 className="font-bold text-3xl mb-4">My Cart</h1>
-        <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center">
           <table>
             <thead>
               <tr>
@@ -66,12 +64,7 @@ const CartLayout = () => {
             </tfoot>
           </table>
         </div>
-        <div className="mt-4">
-        <CustomButton label="Proceed To Checkout" onClick={moveToCheckout}/>
-        </div>
       </div>
     </main>
-  );
-};
-
-export default CartLayout;
+  )
+}

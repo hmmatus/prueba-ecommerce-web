@@ -32,9 +32,9 @@ const MobileMenu = () => {
           className="text-white text-lg focus:outline-none pr-4"
         >
           {isMobileMenuOpen ? (
-            <MdMenuOpen width={30} height={30} />
+            <MdMenuOpen size={40} />
           ) : (
-            <MdOutlineMenu width={30} height={30} />
+            <MdOutlineMenu size={40} />
           )}
         </button>
       </div>

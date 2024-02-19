@@ -6,7 +6,7 @@ import { Category, ProductI } from "@/models/product";
 import { useAppDispatch } from "@/redux/hooks";
 import { addToCart } from "@/redux/slices/cart";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 type ProductsLayoutP = {
@@ -27,7 +27,7 @@ const ProductsLayout = ({ products, categories }: ProductsLayoutP) => {
     }
   };
 
-  const onUpdateList = () => {
+  const onUpdateList = useCallback(() => {
     if (searchValue === "" && tagSelected === "") {
       setFilteredProducts(products);
       return;
@@ -39,7 +39,7 @@ const ProductsLayout = ({ products, categories }: ProductsLayoutP) => {
     }
     const newArray = products.filter((elto) => elto.category === tagSelected && elto.title.includes(searchValue));
     setFilteredProducts(newArray);
-  };
+  }, [tagSelected, products, searchValue]);
   const onChangeSearchValue = (value: string) => {
     setSearchValue(value);
   };
@@ -60,11 +60,6 @@ const ProductsLayout = ({ products, categories }: ProductsLayoutP) => {
   const handleSearch = () => {
     onUpdateList();
   };
-
-
-  useEffect(() => {
-    onUpdateList();
-  }, [tagSelected]);
 
   return (
     <main className="flex flex-col px-4">

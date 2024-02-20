@@ -1,3 +1,4 @@
+import { capitalizeFirstLetter } from "@/utils/nameFormating";
 import styles from "./style.module.css";
 type CategoryTagT = {
   onClick(): void;
@@ -12,7 +13,7 @@ const CategoryTag = ({ onClick, isSelected, label }: CategoryTagT) => {
         isSelected ? styles.selected : styles.normal
       }`}
     >
-      {label}
+      {capitalizeFirstLetter(label)}
     </button>
   );
 };

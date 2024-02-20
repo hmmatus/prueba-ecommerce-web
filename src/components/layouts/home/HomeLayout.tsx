@@ -64,7 +64,7 @@ const HomeLayout = ({ products }: HomeLayoutP) => {
       </div>
       <div className="flex flex-col items-center justify-center my-2 w-50vw">
         <div className="flex items-center justify-center w-50">
-          <h1 className="text-xl">Some of our products</h1>
+          <h1 className="text-xl">New Arrivals</h1>
           <div className="flex self-end">
             <CustomButton
               type="outlined"

@@ -4,7 +4,7 @@ import useScreenSize from "@/utils/screenSize";
 import Link from "next/link";
 import CartButton, { CartButtonT } from "../buttons/cartButton/CardButton";
 import { useAppSelector } from "@/redux/hooks";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { MdOutlineMenu, MdMenuOpen } from "react-icons/md";
 import styles from "./style.module.css";
@@ -32,9 +32,9 @@ const MobileMenu = () => {
           className="text-white text-lg focus:outline-none pr-4"
         >
           {isMobileMenuOpen ? (
-            <MdMenuOpen width={30} height={30} />
+            <MdMenuOpen size={40} />
           ) : (
-            <MdOutlineMenu width={30} height={30} />
+            <MdOutlineMenu size={40} />
           )}
         </button>
       </div>
@@ -60,9 +60,10 @@ const MobileMenu = () => {
   );
 };
 const LaptopMenu = ({ amount, onClick }: CartButtonT) => {
+  const [options] = useState(menuOptions)
   return (
     <div className="flex items-center">
-      {menuOptions.map((elto) => (
+      {options.map((elto) => (
         <Link
           className="mx-2 font-bold text-white hover:text-black"
           key={elto.key}
@@ -76,7 +77,11 @@ const LaptopMenu = ({ amount, onClick }: CartButtonT) => {
   );
 };
 const NavBar = () => {
-  const screenSize = useScreenSize();
+  const currentScreenSize = useScreenSize();
+  const [screenSize, setScreenSize] = useState({
+    width: 0,
+    height: 0
+  });
   const { cart } = useAppSelector((state) => state.cart);
   const totalAmount = useMemo(() => {
     return cart.reduce((total, item) => total + item.price, 0);
@@ -86,12 +91,15 @@ const NavBar = () => {
   const onClickCart = () => {
     router.push("/cart");
   };
+  useEffect(() => {
+    setScreenSize(currentScreenSize);
+  }, [currentScreenSize])
   return (
     <nav className="bg-primary min-h-20 px-4 flex justify-between items-center ">
       <button onClick={() => router.replace("/")}>
         <Image loading="lazy" alt="logo" width={80} height={80} src={"/images/logo.png"} />
       </button>
-      {screenSize.width >= 1024 ? (
+      {screenSize?.width >= 1024 ? (
         <LaptopMenu amount={totalAmount} onClick={onClickCart} />
       ) : (
         <MobileMenu />

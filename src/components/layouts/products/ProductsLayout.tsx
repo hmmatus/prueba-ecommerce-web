@@ -6,7 +6,7 @@ import { Category, ProductI } from "@/models/product";
 import { useAppDispatch } from "@/redux/hooks";
 import { addToCart } from "@/redux/slices/cart";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 type ProductsLayoutP = {
@@ -27,19 +27,24 @@ const ProductsLayout = ({ products, categories }: ProductsLayoutP) => {
     }
   };
 
-  const onUpdateList = () => {
+  const onUpdateList = useCallback(() => {
     if (searchValue === "" && tagSelected === "") {
       setFilteredProducts(products);
       return;
     }
     if (tagSelected === "") {
-      const newArray = products.filter((elto) => elto.title.includes(searchValue));
+      const newArray = products.filter((elto) =>
+        elto.title.includes(searchValue)
+      );
       setFilteredProducts(newArray);
-      return
+      return;
     }
-    const newArray = products.filter((elto) => elto.category === tagSelected && elto.title.includes(searchValue));
+    const newArray = products.filter(
+      (elto) =>
+        elto.category === tagSelected && elto.title.includes(searchValue)
+    );
     setFilteredProducts(newArray);
-  };
+  }, [tagSelected, products, searchValue]);
   const onChangeSearchValue = (value: string) => {
     setSearchValue(value);
   };
@@ -61,10 +66,9 @@ const ProductsLayout = ({ products, categories }: ProductsLayoutP) => {
     onUpdateList();
   };
 
-
   useEffect(() => {
     onUpdateList();
-  }, [tagSelected]);
+  }, [tagSelected, onUpdateList]);
 
   return (
     <main className="flex flex-col px-4">
@@ -75,7 +79,7 @@ const ProductsLayout = ({ products, categories }: ProductsLayoutP) => {
           onBlur={handleSearch}
         />
       </div>
-      <div className="flex items-center justify-center gap-2">
+      <div className="flex md:items-center md:justify-center gap-2  sm:overflow-x-auto overflow-x-scroll">
         {categories.map((elto) => (
           <CategoryTag
             label={elto}

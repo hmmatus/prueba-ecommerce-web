@@ -8,7 +8,6 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   value: string | number;
   name: string;
   onChangeValue(value: string): void;
-  inputProps?: InputHTMLAttributes<HTMLInputElement>;
 }
 const InputText = (props: Props) => {
   const {
@@ -18,7 +17,6 @@ const InputText = (props: Props) => {
     value,
     onChangeValue,
     name,
-    inputProps,
   } = props;
   const onChangeEvent = (e: React.FormEvent<HTMLInputElement>) => {
     onChangeValue(e.currentTarget.value);
@@ -28,9 +26,9 @@ const InputText = (props: Props) => {
       <input
         {...props}
         name={name}
-        className={`w-100 h-8 pl-2 border focus:border-blue focus:outline-none rounded-md border-${
+        className={`h-8 pl-2 border focus:border-blue focus:outline-none rounded-md border-${
           errorMessage ? "error" : "slate-950"
-        } ${props.className}`}
+        } ${props.className} ${props.disabled ? "opacity-30" : ""}`}
         type={type}
         value={value}
         onChange={onChangeEvent}

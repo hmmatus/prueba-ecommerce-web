@@ -22,6 +22,7 @@ const CheckoutLayout = () => {
   const router = useRouter();
   const [formData, setFormData] = useState(initialFormState);
   const [expDate, setExpDate] = useState(new Date());
+  const [loading, setLoading] = useState(false);
 
   const totalAmount = useMemo(() => {
     return cart.reduce((total, item) => total + item.price, 0);
@@ -35,10 +36,12 @@ const CheckoutLayout = () => {
   };
 
   const onPurchase = () => {
+    setLoading(true);
     dispatch(cleanCart());
     setFormData(initialFormState);
     toast("Purchase done successfully", {
       onClose: () => {
+        setLoading(false);
         router.replace("/");
       },
     });
@@ -99,8 +102,8 @@ const CheckoutLayout = () => {
             </tfoot>
           </table>
         </div>
-        <div className="mt-2">
-          <form>
+        <div className="flex flex-col items-center justify-center mt-2 w-full lg:w-4xl">
+          <form className="w-full lg:max-w-2xl">
             <h1 className="text-2xl font-bold mb-2">Personal information</h1>
             <div className="flex flex-col lg:flex-row lg:gap-4">
               <InputText
@@ -108,6 +111,7 @@ const CheckoutLayout = () => {
                 value={formData.name}
                 onChangeValue={(value) => onChangeValueFormData(value, "name")}
                 title="Name"
+                disabled={loading}
               />
               <InputText
                 name="name"
@@ -116,6 +120,7 @@ const CheckoutLayout = () => {
                   onChangeValueFormData(value, "lastName")
                 }
                 title="Last Name"
+                disabled={loading}
               />
             </div>
             <InputText
@@ -123,6 +128,7 @@ const CheckoutLayout = () => {
               value={formData.card}
               onChangeValue={(value) => onChangeValueFormData(value, "card")}
               title="Payment Card"
+              disabled={loading}
             />
             <div className="flex flex-col lg:flex-row lg:gap-4">
               <InputDate
@@ -136,6 +142,8 @@ const CheckoutLayout = () => {
                 title="Expiration Date"
                 dateFormat="MM/YY"
                 selected={expDate}
+                disabled={loading}
+                showMonthYearPicker
               />
               <InputText
                 name="cvv"
@@ -143,6 +151,7 @@ const CheckoutLayout = () => {
                 value={formData.cvv}
                 onChangeValue={(value) => onChangeValueFormData(value, "cvv")}
                 title="CVV"
+                disabled={loading}
               />
             </div>
             <InputText
@@ -150,6 +159,7 @@ const CheckoutLayout = () => {
               value={formData.address}
               onChangeValue={(value) => onChangeValueFormData(value, "address")}
               title="Address"
+              disabled={loading}
             />
             <CustomButton
               label="Complete Purchase"

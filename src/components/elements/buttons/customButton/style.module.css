@@ -14,3 +14,7 @@
   background-color: transparent;
   color: theme("colors.primary");
 }
+
+.disabled {
+  opacity: 60%;
+}

@@ -1,36 +1,39 @@
 import React, { InputHTMLAttributes } from "react";
 import InputWrapper from "../inputWrapper/InputWrapper";
 
-type Props = {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   title: string;
   errorMessage?: string;
   type?: React.HTMLInputTypeAttribute;
   value: string | number;
-  onChange(value: string): void;
   name: string;
+  onChangeValue(value: string): void;
   inputProps?: InputHTMLAttributes<HTMLInputElement>;
-};
-const InputText = ({
-  title,
-  errorMessage,
-  type = "text",
-  value,
-  onChange,
-  name,
-  inputProps
-}: Props) => {
-  const onChangeValue = (e: React.FormEvent<HTMLInputElement>) => {
-    onChange(e.currentTarget.value);
+}
+const InputText = (props: Props) => {
+  const {
+    title,
+    errorMessage,
+    type = "text",
+    value,
+    onChangeValue,
+    name,
+    inputProps,
+  } = props;
+  const onChangeEvent = (e: React.FormEvent<HTMLInputElement>) => {
+    onChangeValue(e.currentTarget.value);
   };
   return (
     <InputWrapper title={title} errorMessage={errorMessage || ""}>
       <input
-        {...inputProps}
+        {...props}
         name={name}
-        className={`w-100 h-8 pl-2 border focus:border-blue rounded-md border-${errorMessage ? "error" : "slate-950"} ${inputProps?.className}`}
+        className={`w-100 h-8 pl-2 border focus:border-blue focus:outline-none rounded-md border-${
+          errorMessage ? "error" : "slate-950"
+        } ${props.className}`}
         type={type}
         value={value}
-        onChange={onChangeValue}
+        onChange={onChangeEvent}
       />
     </InputWrapper>
   );
